@@ -15,13 +15,13 @@ export const HomePage = () => {
         const response = await fetch(`${BASE_URL}/posts?limit=30`);
 
         if (!response.ok) {
-          throw new Error("Не удалось загрузить посты");
+          throw new Error("Error 404!");
         }
 
         const data = await response.json();
         setPosts(data.posts || []);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Неизвестная ошибка");
+        setError(err instanceof Error ? err.message : "Error!");
         console.error(err);
       } finally {
         setLoading(false);
@@ -50,7 +50,7 @@ export const HomePage = () => {
   return (
     <Box sx={{ p: 3 }}>
       <Typography variant="h4" gutterBottom>
-        Все посты
+        Welcome!
       </Typography>
 
       <Box
