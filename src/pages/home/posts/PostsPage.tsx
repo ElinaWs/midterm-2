@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../../constants"
 import type { IPost, IComment } from "../../../types"
 import { Box, Typography, Button, CircularProgress, Chip, Container } from "@mui/material";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export const PostsPage = () => {
-    const { id } = useParams();
-    const [post, setPost] = useState<IPost | null>(null);
-    const [comments, setComments] = useState<IComment[]>([]);
-    const [loading, setLoading] = useState(true);
+    const { id } = useParams()
+    const navigate = useNavigate()
+    
+    const [post, setPost] = useState<IPost | null>(null)
+    const [comments, setComments] = useState<IComment[]>([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
     const fetchPost = async () => {
@@ -61,6 +64,21 @@ export const PostsPage = () => {
         <Typography variant="body1" sx={{ mb: 4, whiteSpace: "pre-wrap" }}>
             {post.body}
         </Typography>
+
+        <Box sx={{ mb: 4 }}>
+            <Button
+            variant="outlined"
+            startIcon={<ArrowBackIcon />}
+            onClick={() => navigate(-1)}
+            sx={{
+                textTransform: "none",
+                borderRadius: 2,
+                px: 3,
+            }}
+            >
+            Back
+            </Button>
+        </Box>
 
         <Box sx={{ display: "flex", gap: 4, mb: 3 }}>
             <Typography color="success.main">
